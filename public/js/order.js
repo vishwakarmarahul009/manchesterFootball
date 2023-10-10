@@ -89,18 +89,18 @@ three.addEventListener('click', () => {
 
 
 function listen_to_cancel_bet() {
-    selectAll('.trade_cancel_btn').forEach((item, i) => {
+    document.querySelectorAll('.trade_cancel_btn').forEach((item, i) => {
       item.addEventListener('click' , ()=>{
-        select('#del_leagueid').innerText = item.parentElement.querySelector('.trade_league_id').innerText;
+        document.querySelector('#del_leagueid').innerText = item.parentElement.querySelector('.trade_league_id').innerText;
 
-        select('.trade_del_box').style.display = 'block';
+        document.querySelector('.trade_del_box').style.display = 'block';
       })
       });
 
-      select('#del_trade').addEventListener('click' , async ()=>{
+      document.querySelector('#del_trade').addEventListener('click' , async ()=>{
 
         popup_page.style.left = '0px';
-        let value = select('#del_leagueid').innerText;
+        let value = document.querySelector('#del_leagueid').innerText;
 
         let data = JSON.stringify({value : value});
         const config = {
@@ -314,7 +314,7 @@ function   create_unsettled_bets(data) {
 
 function create_settled_bets(data) {
   console.log(data);
-  let parent = select('.historicalPopup');
+  let parent = document.querySelector('.historicalPopup');
   let child = document.createElement('div');
   child.classList.add('match-card');
 
@@ -386,6 +386,53 @@ function create_settled_bets(data) {
   parent.append(child);
 }
 
+
+
+// --------------------------------------------------- checking the date -------------------------------------------------------
+function check_date(date, time) {
+
+  const nDate = new Date().toLocaleString('en-US', {
+    timeZone: 'Asia/Calcutta'
+  });
+
+
+  let today = new Date(nDate);
+
+  let match_date = date.split(/\//);
+  let m_time = time.split(/\:/);
+  let m_date = parseInt(match_date[0]);
+  let m_month = parseInt(match_date[1]);
+  let m_hours = parseInt(m_time[0]);
+  let m_minutes = parseInt(m_time[1]);
+
+  console.log(m_hours);
+
+  let minutes_now = parseInt(today.getMinutes());
+  let hours_now = parseInt(today.getHours());
+  minutes_now += 5;
+  if (minutes_now > 60) {
+    minutes_now = minutes_now - 60;
+    hours_now += 1;
+  }
+
+  let valid_date = (parseInt(today.getDate()) == m_date);
+  let valid_hour = (hours_now < m_hours);
+  let valid_minutes = (minutes_now < m_minutes);
+  let equal_hours = (hours_now === m_hours);
+  console.log(hours_now, m_hours, minutes_now, m_minutes);
+  let to_return = '';
+
+  if (valid_date && valid_hour || equal_hours && valid_minutes) {
+    to_return = `<div class="trade_cancel_btn">
+      <i class="fa-solid fa-angles-up"></i>
+      <h3>CANCEL</h3>
+      </div>`;
+    return to_return;
+  }
+
+  return to_return;
+
+}
 
 
 get_bet_history();

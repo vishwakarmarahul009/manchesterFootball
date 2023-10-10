@@ -3,6 +3,7 @@ const vipcantainer = document.querySelector(".VIPbox");
 const tir = document.querySelector(".tir");
 const carousel = document.querySelector(".crouselCantainer");
 const footer = document.querySelector('.footerCantainer');
+let x = false;
 
 
 
@@ -689,13 +690,15 @@ function gettimenow() {
   var curr_hour = d.getHours() < 10 ? '0' + d.getHours() : d.getHours();
   var curr_min = d.getMinutes() < 10 ? '0' + d.getMinutes() : d.getMinutes();
   var time24 = curr_hour;
-  console.log(time24 < 18);
-  if (time24 > 18) {
+  
+  if ( time24 <= 10 || time24 > 18) {
     withdraw_btn.disabled = true;;
     popup_page.style.left = '0px';
     popup_tip.innerText = 'withdraw times up'
     popup_cancel_btn.disabled = false;
   }
+
+  
 }
 
 
@@ -803,7 +806,9 @@ document.querySelector('#sv_bank_details').addEventListener('click', async () =>
     popup_tip.innerText = 'you already have an account.';
     popup_cancel_btn.disabled = false;
 
+
   } else if (response['status'] == 1) {
+    x = true;
     popup_tip.innerText = 'Success! Bank details added';
     popup_cancel_btn.disabled = false;
 
@@ -814,7 +819,6 @@ document.querySelector('#sv_bank_details').addEventListener('click', async () =>
   }
 
 })
-
 
 
 
@@ -872,40 +876,8 @@ function set_user_data(info) {
   });
 
 
-  // if (parseInt(info['vipLevel']) !== 5) {
-  //     select('.s_vip_calc').innerText = `VIP ${parseInt(info['vipLevel']) + 1}`
-  // } else {
-  //     select('.s_vip_calc').innerText = `VIP ${parseInt(info['vipLevel'])}`
-  // }
 
-  // let next_dep_plot = 1;
-
-  // switch (info['vipLevel']) {
-  //     case 0:
-  //         next_dep_plot = 3200;
-  //         break;
-  //     case 1:
-  //         next_dep_plot = 8500;
-  //         break;
-  //     case 2:
-  //         next_dep_plot = 19000;
-  //         break;
-  //     case 3:
-  //         next_dep_plot = 60000;
-  //         break;
-  //     case 4:
-  //         next_dep_plot = 115000;
-  //         break;
-  // }
-
-  // let width = Math.min(100, (((info['max_deposit'] / next_dep_plot) * 100).toFixed(2))) + "%";
-
-  // select('#vip_meter').style.width = width;
-
-  console.log(info);
-  console.log(info.BankDetails[0]['AcNumber']);
-  console.log(info.BankDetails[0]['Ifsc']);
-  console.log(info.BankDetails[0]['withdrawalC']);
+  console.log(info.BankDetails);
 
 
   if (info['BankDetails'] !== 'undefined' && info['BankDetails'].length && info['BankDetails'][0]['Name']) {
@@ -928,13 +900,6 @@ function set_user_data(info) {
       item.value = num;
     });
 
-
-    if (info['BankDetails'] !== 'undefined' && info['BankDetails'].length && info['BankDetails'][0]['Name']) {
-      document.querySelectorAll('.s_acc_withdrawalC').forEach((item, i) => {
-        let num = (info.BankDetails[0]['withdrawalC']);
-        item.value = num;
-      });
-    }
 
 
   }

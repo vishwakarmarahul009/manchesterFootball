@@ -11,7 +11,7 @@ const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const user_data = require('../controller/userController');
 // const user_data = require('./userControler');
-// const admin_function = require('./bet_settle_controler');
+const admin_function = require('./bet_settle_controler');
 // const user_function = require('./userFunctions');
 
 

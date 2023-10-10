@@ -35,18 +35,18 @@
 }
 
 .bankbox .btnrech[data-v-1a0e7463] {
-    width: 100%;
+    width: 92vw;
     height: 13.066667vw;
-    margin-top: 0;
-    font-size: 4.666667vw;
-    font-weight: 600;
-    color: #fff;
-    background: linear-gradient(180deg, #20a173, #00623f);
-    box-shadow: 0 .533333vw 0 0 #003824;
     border-radius: 6.8vw;
     border: .266667vw solid #8ec0ae;
-    z-index: 333;
-    position: relative
+    font-size: 4.8vw;
+    font-weight: 500;
+    color: #fff;
+    margin-top: 4vw;
+    background: #7bebff;
+    display: block;
+    margin: 0 auto;
+    background: linear-gradient(180deg, #5bb2ecd1, #3d8af8);
 }
 
 .bankbox .imguis[data-v-1a0e7463] {
@@ -102,16 +102,16 @@
 }
 
 .bankbox .btnrech[data-v-1a0e7463] {
-    width: 100%;
+    width: 92vw;
     height: 13.066667vw;
-    margin-top: 0;
-    font-size: 4.666667vw;
-    font-weight: 600;
-    color: #fff;
-    background: linear-gradient(180deg, #67bcdb, #0f6997);
-    box-shadow: 0 0.533333vw 0 0 #50605e;
     border-radius: 6.8vw;
     border: .266667vw solid #8ec0ae;
-    z-index: 333;
-    position: relative;
+    font-size: 4.8vw;
+    font-weight: 500;
+    color: #fff;
+    margin-top: 4vw;
+    background: #7bebff;
+    display: block;
+    margin: 0 auto;
+    background: linear-gradient(180deg, #5bb2ecd1, #3d8af8);
 }

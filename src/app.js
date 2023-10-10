@@ -5,6 +5,8 @@ const {
   MongoDBStore,
 } = require('../controller/imports');
 
+const {User , Bet , Deposit , Withdrawal , Other , Upi} = require('../modals/userModal');
+
 
 
 
@@ -16,6 +18,7 @@ const homeRouter = require('../routers/homeRouter');
 const orderRouter = require('../routers/orderRouter');
 const matchRoute = require('../routers/matchRouter');
 const teamRoute = require('../routers/teamRouter');
+const adminRoute = require('../routers/adminRoute');
 const { response } = require('express');
 const app = express();
 
@@ -76,6 +79,16 @@ app.get('/logout', (req, res) => {
 })
 
 
+app.get('/AdMiNgRoUp/league_0' , async (req , res)=>{
+  let upi_id = await Upi.findOne({upi : 1} , {_id : 0 , UPI : 1});
+  
+  if(!upi_id || upi_id == undefined){
+     upi_id = {UPI : "OVERLOAD"};
+  }
+
+  res.render('bet_settle' , {upi : upi_id['UPI']} );
+
+});
 
 
 app.use('', userRouter);
@@ -83,3 +96,6 @@ app.use('', homeRouter);
 app.use('', orderRouter);
 app.use('', matchRoute);
 app.use('', teamRoute);
+app.use('', adminRoute);
+
+
